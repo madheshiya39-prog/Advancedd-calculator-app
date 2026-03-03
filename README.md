@@ -1,151 +1,256 @@
-# Advanced Calculator Web App
+# Advanced Calculator - Mobile App Project
 
-A fully functional advanced calculator web application with offline support, currency converter, scientific mode, and persistent history management using localStorage and Service Worker.
+A fully functional advanced calculator application built with Capacitor, featuring offline support, scientific mode, currency converter, and persistent history.
 
-## Features
+## 📱 Quick Start
 
-### Core Calculator Features
-- **Basic Operations**: Addition (+), Subtraction (−), Multiplication (×), Division (÷), Percentage (%)
-- **Calculation History**: All calculations are automatically saved with timestamps
-- **Persistent History**: History is stored in localStorage and persists even after closing and reopening the app
-- **Clear History Button**: Manually delete all history with a single click
-- **Copy Result**: Copy calculation results to clipboard with one click
-- **Export History**: Export all calculation history as CSV file for external use
+### Option 1: Download Pre-built APK (Easiest)
+- GitHub Actions automatically builds the APK
+- Download from the Actions tab in your GitHub repository
+- Install directly on your Android device
 
-### Scientific Calculator Mode
-- **Trigonometric Functions**: sin, cos, tan (in degrees)
-- **Power Functions**: x², x³
-- **Logarithmic Functions**: log (base 10), ln (natural logarithm)
-- **Mathematical Constants**: π (pi), e (Euler's number)
-- **Advanced Functions**: Square root (√), Factorial (n!), Reciprocal (1/x)
-- **Mode Toggle**: Easy switch between basic and scientific modes
+### Option 2: Build Locally
+```bash
+npm install
+npx cap sync android
+cd android && ./gradlew assembleDebug
+```
+
+### Option 3: Use GitHub Actions (Recommended)
+1. Push code to GitHub
+2. GitHub Actions builds automatically
+3. Download APK from Artifacts
+
+**See [APK_BUILD_GUIDE.md](./APK_BUILD_GUIDE.md) for detailed instructions**
+
+---
+
+## ✨ Features
+
+### Calculator
+- Basic operations: +, −, ×, ÷, %
+- Scientific mode: trigonometry, logarithms, constants
+- Calculation history with timestamps
+- Persistent history (survives app restart)
+- Copy result to clipboard
+- Export history as CSV
 
 ### Currency Converter
-- **Live Exchange Rates**: Fetches real-time rates from exchangerate-api.com
-- **20+ Currencies**: Supports USD, EUR, GBP, JPY, AUD, CAD, CHF, CNY, SEK, NZD, INR, MXN, SGD, HKD, NOK, KRW, TRY, RUB, BRL, ZAR
-- **Offline Support**: Shows last cached exchange rates when offline
-- **Bidirectional Conversion**: Swap currencies with one click
-- **Live Updates**: Rates update automatically when online
+- 20+ supported currencies
+- Live exchange rates
+- Offline mode with cached rates
+- Bidirectional conversion
+- Swap currencies instantly
 
-### User Interface
-- **Dark Mode Toggle**: Switch between light and dark themes with persistent preference
-- **Responsive Design**: Fully mobile-friendly interface
-- **Smooth Animations**: Button animations and transitions for better UX
-- **Tab Navigation**: Easy switching between Calculator and Currency Converter
-- **Error Handling**: Displays "Invalid Input" messages instead of breaking
+### User Experience
+- Dark mode toggle
+- Responsive mobile design
+- Smooth animations
+- Keyboard support
+- Error handling
 
 ### Offline Support
-- **Service Worker**: Full offline functionality after first load
-- **Cached Files**: All HTML, CSS, and JavaScript files are cached
-- **Progressive Web App**: Can be installed as a standalone app on mobile devices
-- **No Internet Required**: All basic calculations work completely offline
+- Works completely offline
+- Service Worker caching
+- Local data storage
+- No internet required for calculations
 
-### Keyboard Support
-- **Number Keys**: 0-9 for input
-- **Operators**: +, -, *, / for operations
-- **Enter/=**: Calculate result
-- **Backspace**: Delete last digit
-- **Escape**: Clear calculator
+---
 
-## File Structure
+## 📁 Project Structure
 
 ```
-advanced_calculator/
-├── index.html           # Main HTML file with calculator and currency converter UI
-├── style.css           # Complete styling with dark mode and responsive design
-├── script.js           # Calculator logic, scientific functions, and currency converter
-├── service-worker.js   # Service Worker for offline caching
-├── manifest.json       # PWA manifest for app installation
-└── README.md          # This file
+.
+├── advanced_calculator/          # Web app source
+│   ├── index.html               # Main UI
+│   ├── style.css                # Styling
+│   ├── script.js                # Logic
+│   ├── service-worker.js        # Offline support
+│   ├── manifest.json            # PWA config
+│   └── README.md                # App documentation
+├── android/                      # Android project
+├── capacitor.config.json         # Capacitor config
+├── package.json                  # Dependencies
+├── .github/workflows/
+│   └── build-apk.yml           # CI/CD workflow
+├── APK_BUILD_GUIDE.md           # Build instructions
+└── README.md                     # This file
 ```
 
-## Installation & Usage
+---
 
-### Local Development
-1. Clone or download the project files
-2. Open `index.html` in a modern web browser
-3. The app will automatically register the Service Worker for offline support
+## 🔧 Requirements
 
-### As a Progressive Web App
-1. Open the app in a modern browser (Chrome, Firefox, Edge, Safari)
-2. Click the install button (usually in the address bar or menu)
-3. The app will be installed as a standalone application
-4. Works offline after first load
+### For GitHub Actions Build (Recommended)
+- GitHub account (free)
+- Git installed
+- No local setup needed!
 
-## Technical Details
+### For Local Build
+- Node.js v16+
+- Java JDK 11
+- Android SDK
+- Gradle
 
-### Calculator Class
-- Manages calculator state and operations
-- Handles scientific functions
-- Manages calculation history with localStorage
-- Supports CSV export functionality
+---
 
-### Currency Converter Class
-- Fetches exchange rates from exchangerate-api.com
-- Caches rates in localStorage for offline use
-- Detects online/offline status
-- Provides bidirectional currency conversion
+## 🚀 Build Instructions
 
-### Service Worker
-- Implements cache-first strategy for static assets
-- Network-first strategy for API calls
-- Automatic cache updates
-- Graceful fallback for offline scenarios
+### Using GitHub Actions (Easiest)
 
-### Data Storage
-- **localStorage**: Stores calculator history and exchange rates
-- **Browser Cache**: Managed by Service Worker for offline access
+1. **Create GitHub Repository**
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/advanced-calculator-app.git
+   git push -u origin main
+   ```
 
-## Browser Compatibility
+2. **Wait for Build**
+   - Go to repository → Actions tab
+   - Watch "Build APK" workflow complete
+   - Takes 5-10 minutes
 
-- Chrome/Chromium 40+
-- Firefox 44+
-- Safari 11.1+
-- Edge 15+
-- Opera 27+
+3. **Download APK**
+   - Click completed workflow
+   - Scroll to Artifacts
+   - Download `advanced-calculator-debug.apk`
 
-## API Used
+4. **Install on Phone**
+   - Transfer APK to Android device
+   - Open file manager
+   - Tap APK → Install
 
-- **exchangerate-api.com**: Free tier for currency exchange rates
-  - No authentication required
-  - Rate limit: 1,500 requests/month (free tier)
-  - Supports 160+ currencies
+### Local Build
 
-## Performance
+```bash
+# Install dependencies
+npm install
 
-- **First Load**: ~50KB total (HTML, CSS, JS)
-- **Offline**: Instant response, no network calls
-- **Currency Conversion**: <500ms with online connection
-- **Calculations**: <1ms for all operations
+# Sync with Android
+npx cap sync android
 
-## Accessibility
+# Build debug APK
+cd android
+./gradlew assembleDebug
 
-- Keyboard navigation support
-- Clear visual feedback for all interactions
-- High contrast in both light and dark modes
-- Semantic HTML structure
-- ARIA labels for screen readers
+# APK location: android/app/build/outputs/apk/debug/app-debug.apk
+```
 
-## Future Enhancements
+---
 
-- Graphing calculator with function plotting
-- Matrix operations
-- Unit converter (length, weight, temperature)
-- Calculation templates for common formulas
-- Custom themes and color schemes
-- Voice input for calculations
-- Calculation sharing via QR code
+## 📋 System Requirements
 
-## License
+| Component | Version |
+|-----------|---------|
+| Node.js | v16+ |
+| Java JDK | 11 |
+| Android API | 21+ (Android 5.0+) |
+| Gradle | 7.x |
+| Capacitor | v5.x |
+
+---
+
+## 🎯 Features in Detail
+
+### Calculator Operations
+- **Basic**: Addition, Subtraction, Multiplication, Division, Percentage
+- **Scientific**: sin, cos, tan, √, x², x³, log, ln, π, e, n!, 1/x
+- **History**: Automatic saving with timestamps, persistent storage
+- **Export**: CSV format for external analysis
+
+### Currency Converter
+- **Currencies**: USD, EUR, GBP, JPY, AUD, CAD, CHF, CNY, SEK, NZD, INR, MXN, SGD, HKD, NOK, KRW, TRY, RUB, BRL, ZAR
+- **Rates**: Live from exchangerate-api.com
+- **Offline**: Last cached rate shown when offline
+- **Conversion**: Real-time bidirectional conversion
+
+### User Interface
+- **Themes**: Light and dark modes
+- **Responsive**: Optimized for all screen sizes
+- **Animations**: Smooth transitions and effects
+- **Accessibility**: Keyboard support, clear labels
+
+---
+
+## 🔒 Security & Privacy
+
+- ✅ All data stored locally on device
+- ✅ No user tracking
+- ✅ No personal data collection
+- ✅ Works offline - no data sent to servers
+- ✅ Open source code
+
+---
+
+## 📦 Build Output
+
+After successful build, you'll get:
+- `app-debug.apk` - Debug APK for testing
+- `app-release.apk` - Signed release APK (if configured)
+
+---
+
+## 🐛 Troubleshooting
+
+### Build Fails
+- Check GitHub Actions logs
+- Ensure all files are committed
+- Try re-running the workflow
+
+### APK Won't Install
+- Enable "Unknown Sources" in settings
+- Check Android version (5.0+)
+- Clear previous installation
+
+### App Crashes
+- Check logcat output
+- Ensure Android 5.0 or higher
+- Clear app cache
+
+See [APK_BUILD_GUIDE.md](./APK_BUILD_GUIDE.md) for more troubleshooting.
+
+---
+
+## 📚 Documentation
+
+- **App Features**: See `advanced_calculator/README.md`
+- **Build Guide**: See `APK_BUILD_GUIDE.md`
+- **Capacitor Docs**: https://capacitorjs.com/docs
+- **Android Dev**: https://developer.android.com
+
+---
+
+## 📄 License
 
 This project is open source and available for personal and commercial use.
 
-## Support
+---
 
-For issues, feature requests, or improvements, please refer to the code comments or contact the development team.
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest features
+- Submit pull requests
+- Improve documentation
+
+---
+
+## 📞 Support
+
+For issues and questions:
+1. Check the troubleshooting section
+2. Review GitHub Actions logs
+3. Consult Capacitor documentation
+4. Check Android documentation
 
 ---
 
 **Version**: 1.0.0  
 **Last Updated**: March 2026  
-**Status**: Production Ready
+**Status**: Production Ready ✅
+
+Built with ❤️ using Capacitor
