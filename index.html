@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Dark Mode Toggle -->
+        <header class="header">
+            <h1>Advanced Calculator</h1>
+            <button id="darkModeToggle" class="dark-mode-btn" title="Toggle Dark Mode">🌙</button>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="calculator">Calculator</button>
+            <button class="tab-btn" data-tab="currency">Currency Converter</button>
+        </nav>
+
+        <!-- Calculator Tab -->
+        <section id="calculator" class="tab-content active">
+            <div class="calculator-wrapper">
+                <!-- Mode Toggle -->
+                <div class="mode-toggle">
+                    <button id="basicModeBtn" class="mode-btn active">Basic</button>
+                    <button id="scientificModeBtn" class="mode-btn">Scientific</button>
+                </div>
+
+                <!-- Display -->
+                <div class="display-section">
+                    <div class="display">
+                        <div class="previous-operand" id="previousOperand"></div>
+                        <div class="current-operand" id="currentOperand">0</div>
+                    </div>
+                </div>
+
+                <!-- Calculator Buttons -->
+                <div class="calculator-grid" id="calculatorGrid">
+                    <!-- Row 1 -->
+                    <button class="btn function-btn" data-action="clear">AC</button>
+                    <button class="btn function-btn" data-action="delete">DEL</button>
+                    <button class="btn function-btn" data-action="percent">%</button>
+                    <button class="btn operator-btn" data-operator="÷">÷</button>
+
+                    <!-- Row 2 -->
+                    <button class="btn number-btn" data-number="7">7</button>
+                    <button class="btn number-btn" data-number="8">8</button>
+                    <button class="btn number-btn" data-number="9">9</button>
+                    <button class="btn operator-btn" data-operator="×">×</button>
+
+                    <!-- Row 3 -->
+                    <button class="btn number-btn" data-number="4">4</button>
+                    <button class="btn number-btn" data-number="5">5</button>
+                    <button class="btn number-btn" data-number="6">6</button>
+                    <button class="btn operator-btn" data-operator="−">−</button>
+
+                    <!-- Row 4 -->
+                    <button class="btn number-btn" data-number="1">1</button>
+                    <button class="btn number-btn" data-number="2">2</button>
+                    <button class="btn number-btn" data-number="3">3</button>
+                    <button class="btn operator-btn" data-operator="+">+</button>
+
+                    <!-- Row 5 -->
+                    <button class="btn number-btn zero-btn" data-number="0">0</button>
+                    <button class="btn number-btn" data-number=".">.</button>
+                    <button class="btn equals-btn" data-action="equals">=</button>
+                </div>
+
+                <!-- Scientific Mode Buttons -->
+                <div class="scientific-grid" id="scientificGrid" style="display: none;">
+                    <button class="btn sci-btn" data-action="sin">sin</button>
+                    <button class="btn sci-btn" data-action="cos">cos</button>
+                    <button class="btn sci-btn" data-action="tan">tan</button>
+                    <button class="btn sci-btn" data-action="sqrt">√</button>
+                    <button class="btn sci-btn" data-action="power">x²</button>
+                    <button class="btn sci-btn" data-action="power3">x³</button>
+                    <button class="btn sci-btn" data-action="log">log</button>
+                    <button class="btn sci-btn" data-action="ln">ln</button>
+                    <button class="btn sci-btn" data-action="pi">π</button>
+                    <button class="btn sci-btn" data-action="e">e</button>
+                    <button class="btn sci-btn" data-action="factorial">n!</button>
+                    <button class="btn sci-btn" data-action="reciprocal">1/x</button>
+                </div>
+
+                <!-- Copy and Export Buttons -->
+                <div class="action-buttons">
+                    <button id="copyResultBtn" class="action-btn" title="Copy result to clipboard">📋 Copy</button>
+                    <button id="exportHistoryBtn" class="action-btn" title="Export history as CSV">📥 Export CSV</button>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="history-section">
+                <div class="history-header">
+                    <h2>Calculation History</h2>
+                    <button id="clearHistoryBtn" class="clear-btn">Clear History</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="empty-history">No calculations yet</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Currency Converter Tab -->
+        <section id="currency" class="tab-content">
+            <div class="currency-wrapper">
+                <div class="currency-container">
+                    <div class="currency-input-group">
+                        <label for="fromCurrency">From:</label>
+                        <select id="fromCurrency" class="currency-select">
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="SEK">SEK - Swedish Krona</option>
+                            <option value="NZD">NZD - New Zealand Dollar</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                            <option value="MXN">MXN - Mexican Peso</option>
+                            <option value="SGD">SGD - Singapore Dollar</option>
+                            <option value="HKD">HKD - Hong Kong Dollar</option>
+                            <option value="NOK">NOK - Norwegian Krone</option>
+                            <option value="KRW">KRW - South Korean Won</option>
+                            <option value="TRY">TRY - Turkish Lira</option>
+                            <option value="RUB">RUB - Russian Ruble</option>
+                            <option value="BRL">BRL - Brazilian Real</option>
+                            <option value="ZAR">ZAR - South African Rand</option>
+                        </select>
+                        <input type="number" id="fromAmount" class="currency-input" placeholder="Enter amount" value="1">
+                    </div>
+
+                    <button id="swapCurrencyBtn" class="swap-btn">⇄ Swap</button>
+
+                    <div class="currency-input-group">
+                        <label for="toCurrency">To:</label>
+                        <select id="toCurrency" class="currency-select">
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="USD">USD - US Dollar</option>
+                            <option value="GBP">GBP - British Pound</option>
+                            <option value="JPY">JPY - Japanese Yen</option>
+                            <option value="AUD">AUD - Australian Dollar</option>
+                            <option value="CAD">CAD - Canadian Dollar</option>
+                            <option value="CHF">CHF - Swiss Franc</option>
+                            <option value="CNY">CNY - Chinese Yuan</option>
+                            <option value="SEK">SEK - Swedish Krona</option>
+                            <option value="NZD">NZD - New Zealand Dollar</option>
+                            <option value="INR">INR - Indian Rupee</option>
+                            <option value="MXN">MXN - Mexican Peso</option>
+                            <option value="SGD">SGD - Singapore Dollar</option>
+                            <option value="HKD">HKD - Hong Kong Dollar</option>
+                            <option value="NOK">NOK - Norwegian Krone</option>
+                            <option value="KRW">KRW - South Korean Won</option>
+                            <option value="TRY">TRY - Turkish Lira</option>
+                            <option value="RUB">RUB - Russian Ruble</option>
+                            <option value="BRL">BRL - Brazilian Real</option>
+                            <option value="ZAR">ZAR - South African Rand</option>
+                        </select>
+                        <input type="number" id="toAmount" class="currency-input" placeholder="Result" readonly>
+                    </div>
+                </div>
+
+                <div class="conversion-info" id="conversionInfo"></div>
+                <div class="offline-notice" id="offlineNotice" style="display: none;">
+                    📡 Offline mode: Showing last updated rate
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
